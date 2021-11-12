@@ -43,6 +43,12 @@ class _MyAppState extends State<MyApp> {
           "MyStore",
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
+        ),
+      ),
       body: FutureBuilder<List>(
         future: getData(),
         builder: (context, snapshot) {
