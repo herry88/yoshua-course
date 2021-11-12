@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+        // ignore: avoid_unnecessary_containers
+        home: MyCard());
+  }
+}
+
+class MyCard extends StatelessWidget {
+  const MyCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: const Text('Belajar Flutter'),
+      ),
+      body:  Center(
+        // ignore: avoid_unnecessary_containers
+        child:  Container(
+          child: const Text('Belajar Flutter'),
+        )
+      ),
+    );
+  }
+}
