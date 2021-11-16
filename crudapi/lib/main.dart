@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'add_data.dart';
+import 'detail_page.dart';
+
 void main() {
   runApp(
     MaterialApp(
@@ -44,7 +47,13 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddData(),
+            ),
+          );
+        },
         child: Icon(
           Icons.add,
         ),
@@ -77,7 +86,11 @@ class ItemList extends StatelessWidget {
         return Container(
           child: GestureDetector(
             onTap: () {
-              //nanti dulu
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => DetailPage(list: list, index: index),
+                ),
+              );
             },
             child: Card(
               child: ListTile(
