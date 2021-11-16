@@ -43,6 +43,12 @@ class _MyAppState extends State<MyApp> {
           "MyStore",
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
+        ),
+      ),
       body: FutureBuilder<List>(
         future: getData(),
         builder: (context, snapshot) {
@@ -67,12 +73,21 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: list == null ? 0 : list!.length,
-      itemBuilder: (context, i) {
+      itemBuilder: (context, index) {
         return Container(
-          child: Card(
-            child: ListTile(
-              title: Text(
-                list![i]['item_name'],
+          child: GestureDetector(
+            onTap: () {
+              //nanti dulu
+            },
+            child: Card(
+              child: ListTile(
+                title: Text(
+                  list![index]['item_name'],
+                ),
+                leading: const Icon(Icons.widgets),
+                subtitle: Text(
+                  "Stock: ${list![index]['stock']}",
+                ),
               ),
             ),
           ),
