@@ -1,0 +1,11 @@
+function namafunction(nama){
+    return nama;
+}
+
+//rute / jalur
+route::get(/user/{nama}, function namafunction());
+
+url: 
+localhost/user/yoshua
+
+yoshua
