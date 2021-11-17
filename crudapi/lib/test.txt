@@ -4,7 +4,7 @@ function namafunction(nama){
 
 //tedakfdkasjfkajf;dlkajjfkadhfhaiuehwfiuwahfiwahfiuhaewfhwewiuofgit 
 
-//rute / jalur
+//rute / jaluradfasjfhjskajfafjaslfdawkf
 route::get(/user/{nama}, function namafunction());
 
 url: 
