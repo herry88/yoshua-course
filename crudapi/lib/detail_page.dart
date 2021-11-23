@@ -18,6 +18,13 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         title: Text(widget.list![widget.index]['item_name']),
       ),
+      body: Container(
+        height: 200.0,
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          
+        ),
+      ),
     );
   }
 }
