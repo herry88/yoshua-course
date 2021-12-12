@@ -1,6 +1,6 @@
 import 'package:newsappsflutter/models/category.dart';
 
-List<CategoryModel>? getCategories() {
+List<CategoryModel> getCategories() {
   List<CategoryModel> myCategories = <CategoryModel>[];
   CategoryModel categoryModel;
 //1
