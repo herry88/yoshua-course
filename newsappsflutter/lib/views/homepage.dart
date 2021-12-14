@@ -96,9 +96,13 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: ListView.builder(
                           itemCount: newsList.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return NewsTile(
                               imgUrl: newsList[index].urlToImage.toString(),
+                              title: newsList[index].title.toString(),
+                              desc: newsList[index].description.toString(),
                             );
                           }),
                     )
