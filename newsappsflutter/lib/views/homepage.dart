@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:newsappsflutter/helper/news.dart';
+import 'package:newsappsflutter/helper/widgets.dart';
 import 'package:newsappsflutter/models/category.dart';
 import 'package:newsappsflutter/helper/data.dart';
 
@@ -17,9 +17,17 @@ class _HomePageState extends State<HomePage> {
   var newsList;
   List<CategoryModel> categories = <CategoryModel>[];
 
+  //function getNews
+  void getNews() async {
+    News news = News();
+    await news.getNews();
+    newsList = news.news;
+  }
+
   @override
   void initState() {
     categories = getCategories();
+    getNews();
     super.initState();
   }
 
@@ -71,6 +79,15 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 16.0,
+                ),
+                child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return NewsTile();
+                    }),
+              )
             ],
           )),
         ),
@@ -108,7 +125,19 @@ class CategoryCard extends StatelessWidget {
               width: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.0),
-                color: Colors.black26,
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.1),
+                    Colors.black.withOpacity(0.05),
+                    Colors.black.withOpacity(0.25),
+                  ],
+                ),
               ),
               child: Text(
                 categoryName,
