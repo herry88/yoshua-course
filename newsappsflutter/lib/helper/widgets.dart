@@ -46,10 +46,21 @@ class NewsTile extends StatelessWidget {
             ),
             Text(
               title.toString(),
-              style:const TextStyle(
+              style: const TextStyle(
                 color: Colors.black87,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(
+              height: 4.0,
+            ),
+            Text(
+              desc.toString(),
+              maxLines: 2,
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 14,
               ),
             )
           ],

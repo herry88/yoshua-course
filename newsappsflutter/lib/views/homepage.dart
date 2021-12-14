@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newsappsflutter/helper/news.dart';
 import 'package:newsappsflutter/helper/widgets.dart';
+import 'package:newsappsflutter/models/articlemodel.dart';
 import 'package:newsappsflutter/models/category.dart';
 import 'package:newsappsflutter/helper/data.dart';
 
@@ -13,21 +14,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // bool loading;
-  var newsList;
+  late bool loading;
   List<CategoryModel> categories = <CategoryModel>[];
+  List<Article> newsList = <Article>[];
 
   //function getNews
   void getNews() async {
     News news = News();
     await news.getNews();
     newsList = news.news;
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
   void initState() {
     categories = getCategories();
     getNews();
+    setState(() {
+      loading = true;
+    });
     super.initState();
   }
 
@@ -58,39 +65,50 @@ class _HomePageState extends State<HomePage> {
         elevation: 0.0,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-              child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                ),
-                height: 70,
-                child: ListView.builder(
-                  // shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    return CategoryCard(
-                      imageAssetUrl: categories[index].imageAssetUrl,
-                      categoryName: categories[index].categoryName,
-                    );
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                  top: 16.0,
-                ),
-                child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return NewsTile();
-                    }),
+        child: loading
+            ? Center(
+                child: Text('Data Loading...'),
               )
-            ],
-          )),
-        ),
+            : SingleChildScrollView(
+                child: Container(
+                    child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                      ),
+                      height: 70,
+                      child: ListView.builder(
+                        // shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: categories.length,
+                        itemBuilder: (context, index) {
+                          return CategoryCard(
+                            imageAssetUrl: categories[index].imageAssetUrl,
+                            categoryName: categories[index].categoryName,
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: 16.0,
+                      ),
+                      child: ListView.builder(
+                          itemCount: newsList.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return NewsTile(
+                              imgUrl: newsList[index].urlToImage.toString(),
+                              title: newsList[index].title.toString(),
+                              desc: newsList[index].description.toString(),
+                            );
+                          }),
+                    )
+                  ],
+                )),
+              ),
       ),
     );
   }
